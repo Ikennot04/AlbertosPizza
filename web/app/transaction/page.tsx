@@ -1,158 +1,66 @@
 'use client';
 import React from 'react';
-import { useTransactions } from '@/context/transactioncontext';
 import { useRouter } from 'next/navigation';
+import Navbar from '../components/navbar';
+import { Transaction as TransactionType, mockTransactions } from './types';
 
-interface Product {
-    id: number;
-    name: string;
-    price: number;
-    quantity: number;
-}
+export default function Transaction() {
+  const router = useRouter();
+  
+  return (
+    <div className="min-h-screen bg-[#f7f0e3]">
+      <Navbar />
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <h1 className="text-2xl sm:text-3xl font-bold text-[#e75f06] mb-6">Transaction History</h1>
 
-interface Transaction {
-    orderNumber: number;
-    date: string;
-    orderList: Product[];
-    totalPrice: number;
-}
-
-export default function Transaction(): JSX.Element {
-    const { transactions } = useTransactions();
-    const router = useRouter();
-
-    return (
-        <div style={styles.container}>
-            {/* Back Button */}
-            <header style={styles.header}>
-                <button
-                    style={styles.backButton}
-                    onClick={() => router.push('/homepage')}
-                >
-                    ← Back
-                </button>
-                <h1 style={styles.pageTitle}>Transaction History</h1>
-            </header>
-
-            {transactions.length === 0 ? (
-                <p style={styles.noTransactions}>No transactions yet.</p>
-            ) : (
-                transactions.map((transaction: Transaction) => (
-                    <div key={transaction.orderNumber} style={styles.card}>
-                        <h2 style={styles.orderNumber}>
-                            Order Number: <span style={styles.highlight}>{transaction.orderNumber}</span>
-                        </h2>
-                        <p style={styles.date}>
-                            <strong>Date:</strong> {transaction.date}
-                        </p>
-                        <h3 style={styles.orderListTitle}>Order List:</h3>
-                        <div style={styles.orderList}>
-                            {transaction.orderList.map((item: Product, index: number) => (
-                                <div key={index} style={styles.orderRow}>
-                                    <span style={styles.itemName}>{item.name}</span>
-                                    <span style={styles.itemQuantity}>{item.quantity} ×</span>
-                                    <span style={styles.itemPrice}>₱{item.price.toFixed(2)}</span>
-                                </div>
-                            ))}
+        {mockTransactions.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-xl text-[#e75f06]">No transactions yet.</p>
+          </div>
+        ) : (
+          <div className="overflow-x-auto bg-white shadow-md rounded-lg">
+            <table className="w-full border-collapse">
+              {/* Table Head */}
+              <thead className="bg-[#e75f06] text-white">
+                <tr>
+                  <th className="p-4 text-left">Order #</th>
+                  <th className="p-4 text-left">Date</th>
+                  <th className="p-4 text-left">Items</th>
+                  <th className="p-4 text-left">Total</th>
+                  <th className="p-4 text-left">Status</th>
+                </tr>
+              </thead>
+              
+              {/* Table Body */}
+              <tbody>
+                {mockTransactions.map((tx: TransactionType) => (
+                  <tr key={tx.id} className="border-b border-gray-200 hover:bg-gray-100 transition">
+                    <td className="p-4 text-[#e75f06] font-semibold">#{tx.orderNumber}</td>
+                    <td className="p-4 text-[#6b4226]">{tx.date}</td>
+                    <td className="p-4">
+                      {tx.items.map((item) => (
+                        <div key={item.id} className="text-[#6b4226]">
+                          {item.quantity}× {item.name} (₱{item.price.toFixed(2)})
                         </div>
-                        <h3 style={styles.totalPrice}>
-                            Total Price: <span style={styles.highlight}>₱{transaction.totalPrice.toFixed(2)}</span>
-                        </h3>
-                    </div>
-                ))
-            )}
-        </div>
-    );
+                      ))}
+                    </td>
+                    <td className="p-4 text-lg font-bold text-[#e75f06]">₱{tx.total.toFixed(2)}</td>
+                    <td className="p-4">
+                      <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                        tx.status === 'completed' ? 'bg-green-100 text-green-800' :
+                        tx.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
+                        'bg-red-100 text-red-800'
+                      }`}>
+                        {tx.status.charAt(0).toUpperCase() + tx.status.slice(1)}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </main>
+    </div>
+  );
 }
-
-const styles: { [key: string]: React.CSSProperties } = {
-    container: {
-        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-        backgroundColor: '#f7f0e3',
-        padding: '20px',
-        minHeight: '100vh',
-    },
-    header: {
-        display: 'flex',
-        alignItems: 'center',
-        marginBottom: '20px',
-    },
-    backButton: {
-        padding: '10px',
-        backgroundColor: '#4b3025',
-        color: 'white',
-        border: 'none',
-        borderRadius: '5px',
-        cursor: 'pointer',
-        marginRight: '15px',
-        fontWeight: 'bold',
-        fontSize: '1rem',
-    },
-    pageTitle: {
-        fontSize: '2rem',
-        color: '#6b4226', // Coffee-themed color
-        fontWeight: 'bold',
-    },
-    noTransactions: {
-        textAlign: 'center' as const,
-        fontSize: '1.5rem',
-        color: '#6b4226',
-        marginTop: '50px',
-    },
-    card: {
-        backgroundColor: '#fff8e7', // Coffee theme
-        padding: '20px',
-        marginBottom: '20px',
-        borderRadius: '12px',
-        boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-    },
-    orderNumber: {
-        fontSize: '1.5rem',
-        color: '#4b3025',
-        marginBottom: '10px',
-    },
-    highlight: {
-        color: '#9e602b', // Highlight color
-        fontWeight: 'bold',
-    },
-    date: {
-        fontSize: '1rem',
-        color: '#6b4226',
-        marginBottom: '15px',
-    },
-    orderListTitle: {
-        fontSize: '1.2rem',
-        fontWeight: 'bold',
-        color: '#4b3025',
-        marginBottom: '10px',
-    },
-    orderList: {
-        display: 'grid',
-        gridTemplateColumns: '2fr 1fr 1fr', // Align items in columns
-        rowGap: '10px',
-        columnGap: '10px',
-        marginBottom: '15px',
-    },
-    orderRow: {
-        display: 'contents',
-    },
-    itemName: {
-        fontWeight: 'bold',
-        color: '#4b3025',
-    },
-    itemQuantity: {
-        textAlign: 'right' as const,
-        color: '#6b4226',
-    },
-    itemPrice: {
-        textAlign: 'right' as const,
-        color: '#9e602b',
-        fontWeight: 'bold',
-    },
-    totalPrice: {
-        fontSize: '1.3rem',
-        fontWeight: 'bold',
-        color: '#4b3025',
-        marginTop: '15px',
-    },
-};

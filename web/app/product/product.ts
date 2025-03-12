@@ -55,5 +55,29 @@ export const initialProducts: Product[] = [
         price: 39,
         stock: 50,
         image: '/images/Productlist/icedcaramel.jpg',
+    },
+    {
+        id: 7,
+        name: 'Macha',
+        description: 'A tantalizing fusion of succulent Taiwanese strawberries mingled with creamy milk',
+        price: 39,
+        stock: 50,
+        image: '/images/Menu/bida.png',
+    },
+    {
+        id: 8,
+        name: 'Macha Berry',
+        description: 'A tantalizing fusion of succulent Taiwanese strawberries mingled with creamy milk',
+        price: 39,
+        stock: 50,
+        image: '/images/Menu/bida.png',
+    },
+    {
+        id: 9,
+        name: 'Macha Berryss',
+        description: 'A tantalizing fusiosadasn of succulent Taiwanese strawberries mingled with creamy milk',
+        price: 39,
+        stock: 50,
+        image: '/images/Menu/bida.png',
     }
 ];

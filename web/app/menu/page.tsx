@@ -22,6 +22,7 @@ export default function Menu() {
     <div>
       <Navbar />
 
+      {/* Heading */}
       <div 
         className={`absolute left-16 -top-10 text-[4rem] sm:text-[5rem] text-[#e75f06] mt-32 leading-none
                     [text-shadow:14px_14px_28px_rgba(0,0,0,0.15)] ${kaushanScript.className}`} 
@@ -38,7 +39,7 @@ export default function Menu() {
         surely miss...
       </div>
 
-      {/* Search input with icon inside */}
+      {/* Search Input */}
       <div className="flex justify-start ml-32 mt-[300px] relative">
         <IoIosSearch 
           className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[#000000]"
@@ -51,22 +52,27 @@ export default function Menu() {
         />
       </div>
 
-      {/* Grid layout for product images */}
-      <div className="mt-[50px] max-w-[1800px] mx-auto px-4 sm:px-6 md:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 gap-4 sm:gap-6 lg:gap-8">
-
+      {/* Product Grid Layout */}
+      <div className="mt-[50px] w-full px-4">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-auto" style={{ maxWidth: '1200px' }}>
           {initialProducts.map((product) => (
-            <div key={product.id} className="relative bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-all">
-              <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-[200px] object-cover rounded-lg"
-              />
-              <div className="mt-4 text-center">
-                <h3 className="font-semibold text-xl">{product.name}</h3>
-                <p className="text-lg text-[#e75f06]">P {product.price}</p>
+            <div 
+              key={product.id} 
+              className="relative bg-white p-3 rounded-lg shadow-lg hover:shadow-xl transition-all"
+              style={{ width: '100%', maxWidth: '280px', height: '320px' }}
+            >
+              <div className="w-full h-[200px] relative overflow-hidden rounded-lg">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-full object-cover rounded-lg"
+                />
               </div>
-              <div className="absolute bottom-4 right-4 bg-[#e75f06] text-white rounded-full p-2 cursor-pointer">
+              <div className="mt-2 text-center">
+                <h3 className="font-semibold text-lg">{product.name}</h3>
+                <p className="text-base text-[#e75f06]">P {product.price}</p>
+              </div>
+              <div className="absolute bottom-2 right-2 bg-[#e75f06] text-white rounded-full p-2 cursor-pointer">
                 +
               </div>
             </div>

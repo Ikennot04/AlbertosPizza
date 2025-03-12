@@ -53,14 +53,13 @@ export default function Homepage(): JSX.Element {
                 <div className="flex justify-center w-full overflow-hidden px-4 sm:px-6 lg:px-8">
                   <div className="inline-flex items-center justify-center">
                   <h2 className={`text-[1.25rem] xs:text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.25rem] xl:text-[2.5rem] font-black text-[#4b3025] uppercase ${bernoru.className} mb-3 sm:mb-4 md:mb-5 tracking-tight whitespace-nowrap text-center`}
-  style={{
-    letterSpacing: '-0.02em',
-    lineHeight: '1',
-    textShadow: 'calc(0.1em/7) calc(0.1em/7) calc(0.2em/7) rgba(75,48,37,0.25), calc(0.2em/7) calc(0.2em/7) calc(0.4em/7) rgba(0,0,0,0.175)',
-  }}>
-  FREE DELIVERY FEE!
-</h2>
-
+                      style={{
+                        letterSpacing: '-0.02em',
+                        lineHeight: '1',
+                        textShadow: 'calc(0.1em/7) calc(0.1em/7) calc(0.2em/7) rgba(75,48,37,0.25), calc(0.2em/7) calc(0.2em/7) calc(0.4em/7) rgba(0,0,0,0.175)',
+                      }}>
+                      FREE DELIVERY FEE!
+  </h2>
                   </div>
                 </div>
                 <h2 className={`text-[0.65rem] sm:text-[0.75rem] font-black text-[#4b3025] uppercase ${bernoru.className} mb-6`}
