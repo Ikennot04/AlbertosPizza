@@ -31,5 +31,44 @@ export const mockTransactions: Transaction[] = [
     ],
     total: 78,
     status: 'completed'
+  },
+  {
+    id: '2',
+    orderNumber: 'ORD-002',
+    date: '2025-03-13',
+    items: [
+      {
+        id: '2',
+        name: 'Brown Spanish',
+        quantity: 1,
+        price: 39,
+        subtotal: 39
+      },
+      {
+        id: '3',
+        name: 'Oreo Coffee',
+        quantity: 1,
+        price: 39,
+        subtotal: 39
+      }
+    ],
+    total: 78,
+    status: 'pending'
+  },
+  {
+    id: '3',
+    orderNumber: 'ORD-003',
+    date: '2025-03-13',
+    items: [
+      {
+        id: '4',
+        name: 'Black Forest',
+        quantity: 3,
+        price: 39,
+        subtotal: 117
+      }
+    ],
+    total: 117,
+    status: 'cancelled'
   }
 ];

@@ -2,7 +2,7 @@
 
 import Navbar from "@/app/components/navbar";
 import React, { useState } from "react";
-import Image from "next/image";
+import Link from "next/link";
 import { Product, initialProducts } from "../product/product";
 import localFont from 'next/font/local';
 
@@ -59,7 +59,7 @@ export default function Homepage(): JSX.Element {
                         textShadow: 'calc(0.1em/7) calc(0.1em/7) calc(0.2em/7) rgba(75,48,37,0.25), calc(0.2em/7) calc(0.2em/7) calc(0.4em/7) rgba(0,0,0,0.175)',
                       }}>
                       FREE DELIVERY FEE!
-  </h2>
+                  </h2>
                   </div>
                 </div>
                 <h2 className={`text-[0.65rem] sm:text-[0.75rem] font-black text-[#4b3025] uppercase ${bernoru.className} mb-6`}
@@ -67,12 +67,13 @@ export default function Homepage(): JSX.Element {
                   NO MINIMUM ORDER REQUIRED IN CERTAIN AREAS
                 </h2>
                 <div className="flex gap-4 ml-8 sm:ml-12 lg:ml-20 xl:ml-24 mt-6">
+                <Link href={"/menu"}>
                   <button className="px-6 py-3 bg-[#df961a] text-white rounded-full font-semibold hover:bg-[#e67a0e] hover:scale-105 hover:shadow-xl transition-all duration-200 shadow-md whitespace-nowrap">
                     View Menu
                   </button>
-                  <button className="px-6 py-3 bg-[#4b3025] text-white rounded-full font-semibold hover:bg-[#3a251c] hover:scale-105 hover:shadow-xl transition-all duration-200 shadow-md whitespace-nowrap">
-                    Add to Cart
-                  </button>
+                  </Link>
+                 
+                  
                 </div>
               </div>
             </div>
