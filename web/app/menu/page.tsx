@@ -1,10 +1,12 @@
 'use client';
 
+import { useState } from "react";
 import localFont from "next/font/local";
 import Navbar from "../components/navbar";
 import { IoIosSearch } from "react-icons/io";
 import { Product, initialProducts } from "../product/product";
 import ProductCard from "../components/productCard";
+import AddProduct from "../components/AddproductModal";
 
 const kaushanScript = localFont({
   src: '../../public/fonts/Kaushan_Script/KaushanScript-Regular.ttf',
@@ -19,6 +21,8 @@ const bernoru = localFont({
 });
 
 export default function Menu() {
+  const [isAddProductOpen, setIsAddProductOpen] = useState(false);
+  
   return (
     <div>
       <Navbar />
@@ -42,8 +46,8 @@ export default function Menu() {
         </div>
       </div>
 
-      {/* Search Input */}
-      <div className="flex justify-center sm:justify-start sm:ml-32 px-4 sm:px-0 mt-8 sm:mt-12">
+      {/* Search and Add Product Section */}
+      <div className="flex justify-between items-center px-4 sm:px-32 mt-8 sm:mt-12">
         <div className="relative w-full max-w-md">
           <IoIosSearch 
             className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[#000000]"
@@ -55,7 +59,18 @@ export default function Menu() {
             className="w-full p-4 pl-12 rounded-[50px] outline outline-2 outline-[#000000] shadow-md"
           />
         </div>
+        <button
+          onClick={() => setIsAddProductOpen(true)}
+          className="ml-4 px-6 py-4 bg-[#405e01] text-white rounded-[50px] shadow-md hover:bg-opacity-90 transition-all"
+        >
+          Add Product
+        </button>
       </div>
+
+      <AddProduct 
+        open={isAddProductOpen}
+        onClose={() => setIsAddProductOpen(false)}
+      />
 
       {/* Product Grid Layout */}
       <div className="mt-8 sm:mt-12 w-full px-4 sm:px-6 lg:px-8">
